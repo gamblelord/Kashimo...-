@@ -17,7 +17,7 @@ local ultbarclr:Frame = ultbar:FindFirstChild("Health").Bar.Bar
 local ulttext:TextButton = ultbar:FindFirstChild("TextLabel")
 
 -- Awakening text & color
-ulttext.Text = "PERFECTED BLOODLUST"
+ulttext.Text = "FULL BLOWN FUNERAL"
 ultbarclr.BackgroundColor3 = Color3.fromRGB(175, 0, 255) -- In RGB values (red, green, blue)
 
 local hotbar:ScreenGui = plrgui:FindFirstChild("Hotbar")
@@ -29,19 +29,19 @@ local b1, b2, b3, b4 = bb1["ToolName"], bb2["ToolName"], bb3["ToolName"], bb4["T
 
 -- Move names
 local function SetMoveNames()
-    b1.Text = "Nyoi Staff"
-    b2.Text = "Spinning Rage"
-    b3.Text = "Voltaic Dropkick"
-    b4.Text = "Slamming Uprise"
+    b1.Text = "Lightning Jab"
+    b2.Text = "Voltaic Fury"
+    b3.Text = "Funeral"
+    b4.Text = "Rising Light"
 end
 SetMoveNames()
 
 -- Awakening move names
 local function SetAwkNames()
     b1.Text = "Pick up the pace."
-    b2.Text = "Lightning Attract"
-    b3.Text = "Spinning Slash"
-    b4.Text = "Lightning Infused Punch"
+    b2.Text = "1000% Rising Light"
+    b3.Text = "Raw Strength"
+    b4.Text = "Amped Clash"
 end
 
 -- Animations
@@ -75,22 +75,22 @@ local newAnimations = {
     m2 = "18716143973", -- Replace with your new m2 animation ID
     m3 = "17889471098", -- Replace with your new m3 animation ID
     m4 = "17889290569", -- Replace with your new m4 animation ID
-    ds = "10470104242", -- Replace with your new downslam animation ID
-    up = "10503381238", -- Replace with your new mini uppercut animation ID
-    wc = "76530443909428", -- Replace with your new wall combo animation ID
+    ds = "13556985475", -- Replace with your new downslam animation ID
+    up = "18179181663", -- Replace with your new mini uppercut animation ID
+    wc = "18716867254", -- Replace with your new wall combo animation ID
     fdash = "15676072469", -- Replace with your new front dash animation ID
     bdash = "13801083337", -- Replace with your new back dash animation ID
     ldash = "18715789130", -- Replace with your new left dash animation ID
     rdash = "18715789130", -- Replace with your new right dash animation ID
-    awk = "17292505729", -- Replace with your new awakening animation ID
-    move1 = "13501296372", -- Replace with your new move 1 animation ID
+    awk = "18435303746", -- Replace with your new awakening animation ID
+    move1 = "18896127525", -- Replace with your new move 1 animation ID
     move2 = "18896124320", -- Replace with your new move 2 animation ID
     move3 = "12832505612", -- Replace with your new move 3 animation ID
-    move4 = "18716690247", -- Replace with your new move 4 animation ID
-    amove1 = "75502010126640", -- Replace with your new move awakening 1 animation ID
-    amove2 = "17292505729", -- Replace with your new move awakening 2 animation ID
-    amove3 = "76530443909428", -- Replace with your new move awakening 3 animation ID
-    amove4 = "18716734026", -- Replace with your new move awakening 4 animation ID
+    move4 = "13501296372", -- Replace with your new move 4 animation ID
+    amove1 = "18715770173", -- Replace with your new move awakening 1 animation ID
+    amove2 = "15446959450", -- Replace with your new move awakening 2 animation ID
+    amove3 = "17097146599", -- Replace with your new move awakening 3 animation ID
+    amove4 = "18897115785", -- Replace with your new move awakening 4 animation ID
 }
 
 -- Code/functions to use in the handlers
@@ -153,10 +153,136 @@ local handlers = {
         chat("CAUSE THIS...")
         task.wait(1)
         chat("IS A FUNERAL FOR THE LIVING!")
+local Players = game:GetService("Players")
+local localPlayer = Players.LocalPlayer
+
+local function createLightningAura(character)
+    if not character then return end
+    local root = character:FindFirstChild("HumanoidRootPart")
+    if not root then return end
+
+    -- Prevent duplicate auras
+    if root:FindFirstChild("LightningAura") then return end
+
+    print("⚡ Creating STRONG Lightning Aura for", character.Name)
+
+    -- 🌀 Create an Attachment at the character's center
+    local auraAttachment = Instance.new("Attachment")
+    auraAttachment.Name = "LightningAura"
+    auraAttachment.Parent = root
+
+    -- ⚡ INTENSE Purple Lightning Particles
+    local lightning = Instance.new("ParticleEmitter")
+    lightning.Texture = "rbxassetid://446111271" -- ⚠️ Replace with a valid lightning texture
+    lightning.Color = ColorSequence.new(Color3.fromRGB(170, 0, 255)) -- Purple
+    lightning.LightEmission = 1
+    lightning.Size = NumberSequence.new({NumberSequenceKeypoint.new(0, 3), NumberSequenceKeypoint.new(1, 6)}) -- Larger size
+    lightning.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0), NumberSequenceKeypoint.new(1, 1)})
+    lightning.Rate = 120 -- More particles per second
+    lightning.Speed = NumberRange.new(8, 15) -- Faster movement
+    lightning.Lifetime = NumberRange.new(0.4, 0.8) -- Longer lifetime
+    lightning.Rotation = NumberRange.new(-180, 180)
+    lightning.VelocitySpread = 720 -- Spreads in all directions
+    lightning.Parent = auraAttachment
+
+    -- ⚡ STRONG Electric Glow (Wider radius)
+    local glow = Instance.new("ParticleEmitter")
+    glow.Texture = "rbxassetid://241594314" -- ⚠️ Replace with a valid glow texture
+    glow.Color = ColorSequence.new(Color3.fromRGB(150, 50, 255))
+    glow.LightEmission = 1
+    glow.Size = NumberSequence.new({NumberSequenceKeypoint.new(0, 5), NumberSequenceKeypoint.new(1, 10)}) -- Much larger glow
+    glow.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0, 0.2), NumberSequenceKeypoint.new(1, 1)})
+    glow.Rate = 80 -- More frequent glowing
+    glow.Speed = NumberRange.new(6, 12)
+    glow.Lifetime = NumberRange.new(0.6, 1.4) -- Longer-lasting glow
+    glow.Rotation = NumberRange.new(-180, 180)
+    glow.VelocitySpread = 720
+    glow.Parent = auraAttachment
+
+    -- ⚡ POWERFUL Arc Lightning (More beams, larger spread)
+    for _ = 1, 8 do -- Increased to 8 beams
+        local beamAttachment1 = Instance.new("Attachment")
+        beamAttachment1.Parent = root
+        beamAttachment1.Position = Vector3.new(math.random(-4, 4), math.random(-4, 4), math.random(-4, 4))
+
+        local beamAttachment2 = Instance.new("Attachment")
+        beamAttachment2.Parent = root
+        beamAttachment2.Position = Vector3.new(math.random(-4, 4), math.random(-4, 4), math.random(-4, 4))
+
+        local lightningArc = Instance.new("Beam")
+        lightningArc.Color = ColorSequence.new(Color3.fromRGB(170, 0, 255))
+        lightningArc.Width0 = 0.3 -- Thicker arcs
+        lightningArc.Width1 = 0.3
+        lightningArc.LightEmission = 1
+        lightningArc.Texture = "rbxassetid://446111271" -- ⚡ Replace with a valid lightning texture
+        lightningArc.TextureSpeed = 8 -- Faster-moving texture
+        lightningArc.TextureLength = 2 -- More stretched lightning
+        lightningArc.Parent = root
+        lightningArc.Attachment0 = beamAttachment1
+        lightningArc.Attachment1 = beamAttachment2
+
+        -- Randomize positions faster to simulate chaotic lightning
+        task.spawn(function()
+            while task.wait(math.random(0.05, 0.2)) do
+                if not root.Parent then break end
+                beamAttachment1.Position = Vector3.new(math.random(-5, 5), math.random(-5, 5), math.random(-5, 5))
+                beamAttachment2.Position = Vector3.new(math.random(-5, 5), math.random(-5, 5), math.random(-5, 5))
+            end
+        end)
+    end
+
+    print("⚡ STRONG Lightning Aura applied to:", character.Name)
+end
+
+-- 🎮 Apply only for your character
+local function onCharacterAdded(character)
+    if character and character:IsDescendantOf(workspace) then
+        createLightningAura(character)
+    end
+end
+
+if localPlayer.Character then
+    onCharacterAdded(localPlayer.Character)
+end
+
+localPlayer.CharacterAdded:Connect(onCharacterAdded)
     end,
 
     move1 = function(tr)
-    chat("IMBUING PIERCE!")
+        local hrp = char:FindFirstChild("HumanoidRootPart")
+
+        local bloodvfx = game.ReplicatedStorage.Resources.BloodSplatter.Attachment:Clone()
+        bloodvfx.Parent = char:FindFirstChild("Torso")
+        for _, v in pairs(game.ReplicatedStorage.Resources.BloodSplatter.Attachment:GetChildren()) do
+            if v:IsA("ParticleEmitter") then
+                v.Enabled = false
+                v:Emit(0)
+            end
+        end
+        bloodvfx:Destroy()
+
+        task.wait(0.7)
+        if not tr.IsPlaying then
+            return
+        end
+        local blood = Instance.new("Part")
+        blood.Size = Vector3.new(0.25, 0.25, 60)
+        blood.CFrame = hrp.CFrame * CFrame.new(0, 0, -25)
+        blood.CanCollide = false
+        blood.Anchored = true
+
+        blood.Color = Color3.fromRGB(255, 255, 255)
+        blood.Material = Enum.Material.Neon
+        blood.CastShadow = false
+        blood.Parent = workspace
+        for _, v in pairs(game.ReplicatedStorage.Resources.BloodSplatter.Attachment:GetChildren()) do
+            if v:IsA("ParticleEmitter") then
+                local cl = v:Clone()
+                cl.Parent = blood
+                cl:Emit(0)
+            end
+        end
+        game:GetService("Debris"):AddItem(blood, 1)
     end,
 
     move2 = function(tr:AnimationTrack)
@@ -194,47 +320,60 @@ local handlers = {
         game:GetService("Debris"):AddItem(bv, 0.5)
         
         newtr:Stop()
-        playAnimation("18715842262", { Weight = 10, Speed = 1.7 })
+        playAnimation("137561511768861", { Weight = 10, Speed = 1.7 })
     end,
 
     move4 = function(tr)
-        print("kashimo awk)
+        print("kashimo awk")
     end,
 
     amove1 = function(tr)
         print("kashimo awk")
-    task.wait(0.5)
-    chat("You filthy detestable human...")
-    task.wait(3)
-    chat("LIGHTNING FINISH!")
-        playAnimation("17465453123", { Weight = 10, Speed = 1 })
-        task.wait(3)
-        playAnimation("76530443909428", { Weight = 10, Speed = 1 })
+    task.wait(10)
+    if char and char:FindFirstChild("HumanoidRootPart") then
+    local aura = char.HumanoidRootPart:FindFirstChild("LightningAura")
+    if aura then aura:Destroy() end
+    object.locked = false
+end
     
     end,
     
     amove2 = function(tr)
-        print("Kashimo Awk")
+        print("kashimo awk")
     chat("You forgot one major thing...")
-    task.wait(2)
-    chat("FALLING LIGHT!")
+    task.wait(4)
+    chat("MAXIMUM OUTPUT! RISING LIGHT!")
   playAnimation("18716897393", { Weight = 10, Speed = 1 })
-
-
-    
+if char and char:FindFirstChild("HumanoidRootPart") then
+    local aura = char.HumanoidRootPart:FindFirstChild("LightningAura")
+    if aura then aura:Destroy() end
+    object.locked = false
+end
     end,
 
     amove3 = function(tr)
         print("kashimo awk")
-    chat("Hmph. Prove your strength they say...")
+    chat("Hmph. They say show your strength...")
     task.wait(3)
     chat("DODGE THIS!")
-    task.wait(0.5)
       playAnimation("106755459092436", { Weight = 10, Speed = 1 })
+    task.wait(10)
+    if char and char:FindFirstChild("HumanoidRootPart") then
+    local aura = char.HumanoidRootPart:FindFirstChild("LightningAura")
+    if aura then aura:Destroy() end
+    object.locked = false
+end
     end,
 
     amove4 = function()
         print("kashimo awk")
+    task.delay(0.3)
+    chat("LIGHTNING SLAM!")
+    task.wait(10)
+    if char and char:FindFirstChild("HumanoidRootPart") then
+    local aura = char.HumanoidRootPart:FindFirstChild("LightningAura")
+    if aura then aura:Destroy() end
+end
     end,
 }
 
